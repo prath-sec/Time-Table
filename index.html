@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>My Week</title>
+  <meta name="description" content="My weekly timetable: lectures, study, German and guitar.">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="My Week">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>My Week</h1>
+      <p id="today-label" class="muted"></p>
+    </div>
+    <div class="actions">
+      <button id="btn-remind" class="ghost" type="button">🔔 Reminders off</button>
+      <button id="btn-menu" class="ghost" type="button" aria-label="More options">⋯</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="card now" id="now" aria-live="polite"></section>
+
+    <section class="card">
+      <div class="section-head">
+        <h2>Timetable</h2>
+        <span class="muted hint">Tap an empty slot to add · tap a block to edit, remove or tick it</span>
+      </div>
+      <nav id="day-tabs" class="day-tabs" aria-label="Choose day"></nav>
+      <div class="grid-wrap"><div id="grid" class="grid"></div></div>
+      <div id="legend" class="legend"></div>
+    </section>
+  </main>
+
+  <dialog id="edit">
+    <form id="edit-form" method="dialog">
+      <h3 id="edit-title"></h3>
+      <label>Activity
+        <select id="edit-cat"></select>
+      </label>
+      <label>Note
+        <input id="edit-label" maxlength="40" placeholder="e.g. Vocab + grammar">
+      </label>
+      <label class="check"><input type="checkbox" id="edit-done"> Done this week</label>
+      <div class="buttons">
+        <button value="save" class="primary" id="edit-save">Save</button>
+        <button value="cancel" class="ghost" formnovalidate>Cancel</button>
+        <button value="clear" class="ghost danger" id="edit-clear" formnovalidate>🗑 Remove</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="menu">
+    <form method="dialog" class="menu">
+      <h3>Options</h3>
+      <button type="button" class="ghost" id="m-export">⬇️ Export backup</button>
+      <button type="button" class="ghost" id="m-import">⬆️ Import backup</button>
+      <button type="button" class="ghost" id="m-reset-week">↺ Clear this week's ticks</button>
+      <button type="button" class="ghost danger" id="m-reset-all">⟲ Restore original timetable</button>
+      <button value="close" class="primary">Close</button>
+    </form>
+  </dialog>
+
+  <input type="file" id="import-file" accept="application/json,.json" hidden>
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
